@@ -18,6 +18,8 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Content';
+
 
     public static function form(Form $form): Form
     {
@@ -32,6 +34,9 @@ class PostResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('post_date')
                     ->required(),
+                Forms\Components\TextInput::make('link_artikel')
+                ->url()
+                    ->required()
             ]);
     }
 
@@ -57,7 +62,7 @@ class PostResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
