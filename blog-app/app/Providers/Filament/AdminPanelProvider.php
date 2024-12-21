@@ -30,8 +30,10 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->registration(RegisterUser::class)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Emerald,
             ])
+            ->font('Poppins')
+            ->favicon(asset('images/icons8-blog-32.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
