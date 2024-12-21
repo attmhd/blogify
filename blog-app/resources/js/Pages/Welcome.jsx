@@ -1,7 +1,8 @@
 import Card from '@/Components/Card';
 import { Head, Link } from '@inertiajs/react';
+import Navbar from '@/Components/Navbar';
 
-export default function Welcome({ articles, laravelVersion, phpVersion }) {
+export default function Welcome({ articles }) {
     const handleImageError = () => {
         document
             .getElementById('screenshot-container')
@@ -19,25 +20,37 @@ export default function Welcome({ articles, laravelVersion, phpVersion }) {
         <>
             <Head title="Welcome" />
 
-            <section className="bg-white dark:bg-gray-900">
+            <Navbar />
+
+            <section className="bg-white dark:bg-gray-900 pt-8">
                 <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                    <div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-                        <h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Blog</h2>
-                            <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">We use an agile approach to test assumptions and connect with the needs of your audience early and often.</p>
-                    </div> 
+                    <div className="mx-auto max-w-screen-md text-center lg:mb-16 mb-8">
+                        <h1 className="text-4xl font-extrabold leading-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+                            Welcome to Blogify
+                        </h1>
+                        <p className="mt-4 text-lg font-light text-gray-500 sm:text-xl lg:text-2xl dark:text-gray-400">
+                            Blogify is an easy-to-use platform that lets you share your ideas, stories, and knowledge with simple, fast, and fun tools. Start your blogging journey today!
+                        </p>
+                        
+                    </div>
                     <div className="grid gap-8 lg:grid-cols-2">
-
-                
-
-                    {articles.data.map((item, i) => (
-                        <div key={i}>
-                            <Card
-                                title={item.title}
-                                date={item.created_at}
-                            />
-                        </div>
-                    ))}
-                </div>
+                        
+                        {articles.data.map((item, i) => (
+                            <div key={i}>
+                                
+                                {item.is_published == 1 ? (
+                                    <Card
+                                        title={item.title}
+                                        date={item.created_at}
+                                        detail={item.id}
+                                    />
+                                ) : (
+                                    ''
+                                )}
+                                
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>

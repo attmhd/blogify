@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.custom-pre {
+    background-color: #2d2d2d; /* Dark background */
+    color: #f8f8f2; /* Light text color */
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 1em;
+  }
+  
+  .custom-pre code {
+    color: inherit; /* Ensure code text color matches the pre text color */
+  }
+
+  .custom-blockquote {
+    padding: 1em;
+    margin: 0 0 1em;
+    border-left: 0.25em solid #dfe2e5;
+    color: #6a737d;
+    background-color: #f6f8fa;
+    font-style: italic;
+  }
+
+  .custom-li {
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+    list-style-type: disc;
+}
+
+.custom-li ul {
+    list-style-type: circle;
+}
+
+.custom-li ol {
+    list-style-type: decimal;
+}
