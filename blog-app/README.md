@@ -10,6 +10,9 @@ This is the final project for the web development course.
 - Laravel 11 & Filament for admin panel
 - Laravel Inertia for reader pages
 
+## Demo
+
+[![Watch this video](https://img.youtube.com/vi/MGL7Djz-oLc0.jpg)](https://www.youtube.com/watch?v=MGL7Djz-oLc)
 ## Installation
 
 Clone project
