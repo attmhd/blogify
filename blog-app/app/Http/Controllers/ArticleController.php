@@ -3,22 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\Article;
+use App\Model\Category;
 
 class ArticleController extends Controller
 {
-    protected $article;
-
-    public function __construct(Article $article)
-    {
-        $this->article = $article;
-    }
+    
 
     public function index()
     {
-        $articles = $this->article->latest()->get();
-        return view('welcome', compact('articles'));
-        // return response()->json(['status' => 200, 'message' => 'Success', 'data' => $articles]);
+        $articles = Article::paginate(5);
+        return Inertia::render('Welcome', [
+            'articles' => $articles,
+        ]);
     }
     
+    public function show($id)
+    {
+        $article = Article::find($id);
+        return Inertia::render('DetailPost', [
+            'article' => $article,
+        ]);
+    }
 }
