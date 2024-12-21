@@ -18,7 +18,7 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Master Data';
 
 
     public static function form(Form $form): Form
@@ -30,7 +30,7 @@ class PostResource extends Resource
                     ->relationship('category', 'name')
                     ->required(),
                 Forms\Components\Hidden::make('username')
-                    ->default(auth()->user()->name)
+                    ->default(\Illuminate\Support\Facades\Auth::user()->name)
                     ->required(),
                 Forms\Components\DatePicker::make('post_date')
                     ->required(),

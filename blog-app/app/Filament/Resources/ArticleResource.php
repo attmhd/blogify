@@ -18,7 +18,7 @@ class ArticleResource extends Resource
     protected static ?string $model = Article::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Master Data';
 
 
     public static function form(Form $form): Form
