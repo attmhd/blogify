@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 from groq import Groq
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -12,6 +13,14 @@ load_dotenv()
 # Initialize FastAPI app
 app = FastAPI()
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Initialize Groq client
 client = Groq()
 client.api_key = os.getenv("GROQ_API_KEY")
