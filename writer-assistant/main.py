@@ -1,8 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import requests
 import os
 from dotenv import load_dotenv
+from groq import Groq
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import uvicorn
 
 # Load environment variables from .env file
 load_dotenv()
@@ -10,32 +11,31 @@ load_dotenv()
 # Initialize FastAPI app
 app = FastAPI()
 
-# BaseModel for input validation
-class QueryInput(BaseModel):
-    prompt: str
+# Initialize Groq client
+client = Groq()
+client.api_key = os.getenv("GROQ_API_KEY")
 
-# Endpoint to call Groq API
-@app.post("/generate/")
-def generate_response(input: QueryInput):
-    GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"  # Replace with the correct Groq API endpoint
-    API_KEY = os.getenv("GROQ_API_KEY")  # Ensure your .env file has the correct API key
+class ChatRequest(BaseModel):
+    content: str
 
-    headers = {
-        "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json"
-    }
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": request.content,
+                }
+            ],
+            model="llama3-8b-8192",
+            max_tokens=1024,
+            temperature=0.5,
+            top_p=0.8
+        )
+        return {"response": chat_completion.choices[0].message.content}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating chat completion: {str(e)}")
 
-    data = {
-        "model": "llama-3.3-70b-versatile",
-        "messages": [{"role": "user", "content": input.prompt}],
-        "temperature": 0.7,
-        "max_tokens": 10000,
-        "top_p": 1.0,
-    }
-
-    response = requests.post(GROQ_API_URL, headers=headers, json=data)
-
-    if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail=response.text)
-
-    
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)
