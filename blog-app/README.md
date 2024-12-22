@@ -1,5 +1,5 @@
 
-# Miniblog V1.0
+# Blogify V1.0
 
 This is the final project for the web development course.
 
