@@ -22,10 +22,15 @@ use RegisterUser;
 
 class AdminPanelProvider extends PanelProvider
 {
+
+    public static $icon = 'heroicon-o-document-text';
+
+
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
+            ->homeUrl('/')
             ->id('admin')
             ->path('admin')
             ->login()

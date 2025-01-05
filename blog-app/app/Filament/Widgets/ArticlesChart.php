@@ -18,9 +18,9 @@ class ArticlesChart extends ChartWidget
                 [
                     'label' => 'Article created',
                     'data' => Article::selectRaw('COUNT(*) as count')
-                        ->whereYear('created_at', date('Y'))
-                        ->groupByRaw('MONTH(created_at)')
-                        ->orderByRaw('MONTH(created_at)')
+                        ->whereYear('updated_at', date('Y'))
+                        ->groupByRaw('MONTH(updated_at)')
+                        ->orderByRaw('MONTH(updated_at)')
                         ->pluck('count')
                         ->toArray(),
                 ],
