@@ -1,7 +1,7 @@
 
 # Blogify V1.0
 
-This is the final project for the web development course.
+This is the final project for the web development course ( UAS Project ).
 
 ## Tech Stack
 
@@ -39,6 +39,11 @@ Generate Key
 php artisan key:generate
 ```    
 
+Migrate Database
+```bash
+php artisan migrate
+```
+
 Running project
 
 ```bash
@@ -51,6 +56,9 @@ Generate Key
 ```bash
 php artisan serve
 ```    
+
+## Next Features
+ - Integrate with Writer Assistant ( LLama model )
     
 ## Authors
 
