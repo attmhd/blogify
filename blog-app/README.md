@@ -23,7 +23,7 @@ Clone project
 Go to project directory
 
 ```bash
-  cd simple-blog
+  cd blogify/blog-app
 ```
 Rename **env.example** to **.env**
 
@@ -51,11 +51,6 @@ php artisan serve
 npm run dev
 ```    
 
-Generate Key
-
-```bash
-php artisan serve
-```    
 
 ## Next Features
  - Integrate with Writer Assistant ( LLama model )
