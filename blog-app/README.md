@@ -18,7 +18,7 @@ This is the final project for the web development course ( UAS Project ).
 Clone project
 
 ```bash
-  https://github.com/attmhd/miniblog.git
+  https://github.com/attmhd/blogify.git
 ```
 Go to project directory
 
