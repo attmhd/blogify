@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +10,8 @@ use Illuminate\Http\Request;
 
 
 
-Route::get('/', [ArticleController::class, 'index'])->name('welcome');
+// Route::get('/', [ArticleController::class, 'index'])->name('welcome');
+Route::get('/', [PostsController::class, 'index'])->name('welcome');
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
 
 

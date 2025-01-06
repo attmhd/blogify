@@ -1,24 +1,20 @@
 import Card from '@/Components/Card';
 import { Head } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
-import { router } from '@inertiajs/react';
+import { useState } from 'react';
 
-export default function Welcome({ articles, auth }) {
-    // const handleImageError = () => {
-    //     document
-    //         .getElementById('screenshot-container')
-    //         ?.classList.add('!hidden');
-    //     document.getElementById('docs-card')?.classList.add('!row-span-1');
-    //     document
-    //         .getElementById('docs-card-content')
-    //         ?.classList.add('!flex-row');
-    //     document.getElementById('background')?.classList.add('!hidden');
-    // };
+export default function Welcome({ posts, auth , category}) {
 
-    console.log(auth);
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
- 
-
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+    
+    const filteredPosts = selectedCategory && selectedCategory !== 'All'
+        ? posts.data.filter((post) => post.category.name === selectedCategory)
+        : posts.data;
+    
     return (
         <>
             <Head title="Welcome" />
@@ -28,7 +24,7 @@ export default function Welcome({ articles, auth }) {
             ) : (
                 <Navbar status="Login" />
             )}
-            
+
 
             <section className="bg-white dark:bg-gray-900 pt-8">
 
@@ -43,24 +39,50 @@ export default function Welcome({ articles, auth }) {
                         </p>
                         
                     </div>
-                    <div className="grid gap-8 lg:grid-cols-2">
-                        
-                        {articles.data.map((item, i) => (
-                            <div key={i}>
-                                
-                                {item.is_published == 1 ? (
-                                    <Card
-                                        title={item.title}
-                                        date={item.created_at}
-                                        detail={item.id}
-                                    />
-                                ) : (
-                                    ''
-                                )}
-                                
-                            </div>
+
+                    <div className="flex justify-center my-10">
+                        <label className="mx-2">
+                            <input
+                                type="radio"
+                                name="category"
+                                value="All"
+                                checked={selectedCategory === 'All'}
+                                onChange={handleCategoryChange}
+                                className="mr-1"
+                            />
+                            All
+                        </label>
+                        {category.map((item, i) => (
+                            <label key={i} className="mx-2">
+                                <input
+                                    type="radio"
+                                    name="category"
+                                    value={item.name}
+                                    checked={selectedCategory === item.name}
+                                    onChange={handleCategoryChange}
+                                    className="mr-1"
+                                />
+                                {item.name}
+                            </label>
                         ))}
                     </div>
+                    
+                    <div className="grid gap-8 lg:grid-cols-2">
+            {filteredPosts.map((item, i) => (
+                <div key={i}>
+                    {item.article.is_published == 1 ? (
+                        <Card
+                            title={item.article.title}
+                            date={item.article.created_at}
+                            detail={item.article.id}
+                            category={item.category.name}
+                        />
+                    ) : (
+                        ''
+                    )}
+                </div>
+            ))}
+        </div>
                 </div>
             </section>
         </>

@@ -29,14 +29,16 @@ class PostResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
+                Forms\Components\Select::make('article_id')
+                    ->relationship('article', 'title')
+                    ->required(),
                 Forms\Components\Hidden::make('username')
                     ->default(\Illuminate\Support\Facades\Auth::user()->name)
                     ->required(),
                 Forms\Components\DatePicker::make('post_date')
                     ->required(),
                 Forms\Components\TextInput::make('link_artikel')
-                ->url()
-                    ->required()
+                ->url()->required()
             ]);
     }
 
@@ -48,6 +50,14 @@ class PostResource extends Resource
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('username')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('article.title')
+                    ->label('Category')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

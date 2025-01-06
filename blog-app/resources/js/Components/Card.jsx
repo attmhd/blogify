@@ -1,4 +1,4 @@
-export default function Card({title, date, detail}) {
+export default function Card({title, date, detail, category}) {
 
     // buatkan fungsi format tanggal disini , created at dikurang dengan now
     const formatDate = (date) => {
@@ -18,6 +18,7 @@ export default function Card({title, date, detail}) {
                       {category}
                   </span> */}
                   <span class="text-sm">{formattedDate}</span>
+                  <span class="text-sm">{category}</span>
               </div>
               <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><a href="#">{title}</a></h2>
               <p class="mb-5 font-light text-gray-500 dark:text-gray-400">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
